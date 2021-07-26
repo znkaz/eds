@@ -5,10 +5,10 @@ namespace Migrations;
 use Illuminate\Database\Schema\Blueprint;
 use ZnLib\Migration\Domain\Base\BaseCreateTableMigration;
 
-class m_2021_07_26_110801_create_crl_table extends BaseCreateTableMigration
+class m_2021_07_26_174501_create_certificate_table extends BaseCreateTableMigration
 {
 
-    protected $tableName = 'eds_crl';
+    protected $tableName = 'eds_certificate';
     protected $tableComment = '';
 
     public function tableStructure(Blueprint $table): void
@@ -16,11 +16,11 @@ class m_2021_07_26_110801_create_crl_table extends BaseCreateTableMigration
         $table->integer('id')->autoIncrement()->comment('Идентификатор');
         $table->integer('host_id')->comment('Идентификатор хоста');
         $table->string('key')->comment('Идентификатор сертификата');
-        $table->dateTime('revoked_at')->comment('Время отзыва сертификата');
-        $table->dateTime('created_at')->comment('Время создания');
-        
+        $table->string('content')->comment('Сертификат в формате PEM');
+        $table->string('type')->comment('Тип (ca, issuer, subject)');
+
         $table->unique(['host_id', 'key']);
-        
+
         $this->addForeign($table, 'host_id', 'eds_crl_host');
     }
 }
