@@ -1,0 +1,19 @@
+#!/usr/bin/env php
+<?php
+
+use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
+use ZnCore\Base\Libs\App\Factories\ApplicationFactory;
+use ZnCore\Base\Libs\App\Factories\KernelFactory;
+use ZnCore\Base\Libs\DotEnv\DotEnv;
+
+require __DIR__ . '/../../../autoload.php';
+
+DotEnv::init();
+
+$bundles = [
+    new \ZnCore\Base\Libs\App\Bundle(['all']),
+    new \ZnKaz\Eds\Bundle(['all']),
+];
+$kernel = KernelFactory::createConsoleKernel($bundles);
+$application = ApplicationFactory::createConsole($kernel);
+$application->run();
