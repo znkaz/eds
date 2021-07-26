@@ -151,7 +151,7 @@ class Signature
 
         ///dd($this->getRootNCa());
 
-        $signatureService = new SignatureService($this->getRootNCa());
+//        $signatureService = new SignatureService($this->getRootNCa());
         //$info = $signatureService->getInfo($xml);
         //dd($info);
 
@@ -182,7 +182,7 @@ class Signature
         return $verifyEntity;
     }
 
-    private function extractCertificateFromXml(string $xml)
+    public function extractCertificateFromXml(string $xml)
     {
         $xmlEncoder = new XmlEncoder();
         $arr = $xmlEncoder->decode($xml);
