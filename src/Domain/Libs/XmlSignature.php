@@ -27,9 +27,12 @@ class XmlSignature
     private $password;
     private $ca;
 
-    public function __construct()
+    private $certificateValidator;
+
+    public function __construct(Certificate $certificateValidator = null)
     {
         $this->x509 = new X509();
+        $this->certificateValidator = $certificateValidator;
     }
 
     public function setRootCa(string $ca)
@@ -101,6 +104,13 @@ class XmlSignature
         $objKey->loadKey($this->privateKey, false);
 
         if ($this->certificate) {
+            if($this->certificateValidator == null) {
+                throw new Exception('Certificate validator not set!');
+            }
+
+            $this->certificateValidator->setCa($this->ca);
+            $this->certificateValidator->verify($this->certificate);
+
             $objDSig->add509Cert($this->certificate);
         }
 
@@ -159,9 +169,12 @@ class XmlSignature
             throw new FailSignatureException();
         }
 
-        $certificateLib = new Certificate();
-        $certificateLib->setCa($this->ca);
-        $certificateLib->verify($objKeyInfo->getX509Certificate());
+        if($this->certificateValidator == null) {
+            throw new Exception('Certificate validator not set!');
+        }
+
+        $this->certificateValidator->setCa($this->ca);
+        $this->certificateValidator->verify($objKeyInfo->getX509Certificate());
     }
 
     public function ___verifyCertificate($certContent): VerifyEntity

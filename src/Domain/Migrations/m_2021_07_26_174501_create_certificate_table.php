@@ -16,7 +16,7 @@ class m_2021_07_26_174501_create_certificate_table extends BaseCreateTableMigrat
         $table->integer('id')->autoIncrement()->comment('Идентификатор');
         $table->integer('host_id')->comment('Идентификатор хоста');
         $table->string('key')->comment('Идентификатор сертификата');
-        $table->string('content')->comment('Сертификат в формате PEM');
+        $table->text('content')->comment('Сертификат в формате PEM');
         $table->string('type')->comment('Тип (ca, issuer, subject)');
 
         $table->unique(['host_id', 'key']);
