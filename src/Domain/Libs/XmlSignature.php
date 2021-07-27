@@ -10,13 +10,14 @@ use RobRichards\XMLSecLibs\XMLSecEnc;
 use RobRichards\XMLSecLibs\XMLSecurityDSig;
 use RobRichards\XMLSecLibs\XMLSecurityKey;
 use ZnCore\Base\Encoders\XmlEncoder;
+use ZnCrypt\Base\Domain\Exceptions\FailSignatureException;
+use ZnCrypt\Base\Domain\Exceptions\InvalidDigestException;
 use ZnCrypt\Pki\X509\Domain\Helpers\X509Helper;
-use ZnCrypt\Pki\X509\Domain\Services\SignatureService;
 use ZnCrypt\Pki\XmlDSig\Domain\Entities\FingerprintEntity;
 use ZnCrypt\Pki\XmlDSig\Domain\Entities\HashEntity;
 use ZnCrypt\Pki\XmlDSig\Domain\Entities\VerifyEntity;
 
-class Signature
+class XmlSignature
 {
 
     private $x509;
@@ -24,6 +25,7 @@ class Signature
     private $publicKey;
     private $certificate;
     private $password;
+    private $ca;
 
     public function __construct()
     {
@@ -33,12 +35,13 @@ class Signature
     public function setRootCa(string $ca)
     {
         $this->x509->loadCA($ca);
+        $this->ca = $ca;
     }
 
     public function loadPrivateKey(string $privateKey, string $password = null)
     {
         $this->privateKey = $privateKey;
-        if($password) {
+        if ($password) {
             $this->password = $password;
         }
     }
@@ -97,10 +100,10 @@ class Signature
         // Load the private key
         $objKey->loadKey($this->privateKey, false);
 
-        if($this->certificate) {
+        if ($this->certificate) {
             $objDSig->add509Cert($this->certificate);
         }
-        
+
         // Sign the XML file
         $objDSig->sign($objKey);
 
@@ -111,7 +114,7 @@ class Signature
         return $signedXml;
     }
 
-    public function verify(string $xml): VerifyEntity
+    public function verify(string $xml)
     {
         $doc = new DOMDocument();
         $doc->loadXML($xml);
@@ -130,11 +133,15 @@ class Signature
 
         $objKeyInfo = XMLSecEnc::staticLocateKeyInfo($objKey, $objDSig);
         if (!$objKeyInfo->key) {
-            if($this->publicKey) {
+            if ($this->publicKey) {
                 $objKey->loadKey($this->publicKey);
             }
-            if($this->certificate) {
+            if ($this->certificate) {
                 $objKey->loadKey($this->certificate, false, true);
+            } else {
+                $certificatePem = $this->extractCertificateFromXml($xml);
+                // dd($certificatePem);
+                $objKey->loadKey($certificatePem, false, true);
             }
         }
 
@@ -143,29 +150,18 @@ class Signature
         } catch (\Throwable $e) {
             $isValidDigest = false;
         }
+        if (!$isValidDigest) {
+            throw new InvalidDigestException();
+        }
 
-        //$isValidX509 = $this->validateX509Cert($xml);
+        $isValidSignatire = $objXMLSecDSig->verify($objKey) === 1;
+        if (!$isValidSignatire) {
+            throw new FailSignatureException();
+        }
 
-        $certContent = $this->extractCertificateFromXml($xml);
-        $certArray = $this->x509->loadX509($certContent);
-
-        ///dd($this->getRootNCa());
-
-//        $signatureService = new SignatureService($this->getRootNCa());
-        //$info = $signatureService->getInfo($xml);
-        //dd($info);
-
-        $verifyEntity = new VerifyEntity();
-        $verifyEntity->setCertificateSignature($this->x509->validateSignature());
-
-        $verifyEntity->setCertificateDate($this->x509->validateDate());
-        $verifyEntity->setSignature($objXMLSecDSig->verify($objKey) === 1);
-        $verifyEntity->setDigest($isValidDigest);
-        //$verifyEntity->setPerson($info->getPerson());
-        $verifyEntity->setCertificateData($certArray);
-//        dd($certArray['tbsCertificate']['subjectPublicKeyInfo']['subjectPublicKey']);
-        $verifyEntity->setFingerprint($this->publicKeyFingerprint($certArray['tbsCertificate']['subjectPublicKeyInfo']['subjectPublicKey']));
-        return $verifyEntity;
+        $certificateLib = new Certificate();
+        $certificateLib->setCa($this->ca);
+        $certificateLib->verify($objKeyInfo->getX509Certificate());
     }
 
     public function ___verifyCertificate($certContent): VerifyEntity
@@ -182,7 +178,7 @@ class Signature
         return $verifyEntity;
     }
 
-    public function extractCertificateFromXml(string $xml)
+    private function extractCertificateFromXml(string $xml)
     {
         $xmlEncoder = new XmlEncoder();
         $arr = $xmlEncoder->decode($xml);

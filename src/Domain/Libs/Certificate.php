@@ -5,25 +5,24 @@ namespace ZnKaz\Eds\Domain\Libs;
 use phpseclib\File\X509;
 use ZnCrypt\Base\Domain\Exceptions\CertificateExpiredException;
 use ZnCrypt\Base\Domain\Exceptions\FailCertificateSignatureException;
-use ZnCrypt\Pki\XmlDSig\Domain\Entities\HashEntity;
 
-class CertificateValidator
+class Certificate
 {
 
-    private $x509;
+    //private $x509;
     private $ca;
 
-    public function __construct()
+    /*public function __construct()
     {
         $this->x509 = new X509();
-    }
+    }*/
 
-    public function setCa(string $ca)
+    public function setCa(string $ca): void
     {
         $this->ca = $ca;
     }
 
-    public function validate(string $certificate)
+    public function verify(string $certificate): void
     {
         $x509 = new X509();
         $x509->loadCA($this->ca);
