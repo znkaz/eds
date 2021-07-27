@@ -11,7 +11,7 @@ class HostRepository extends BaseEloquentCrudRepository implements HostRepositor
 
     public function tableName() : string
     {
-        return 'eds_crl_host';
+        return 'eds_host';
     }
 
     public function getEntityClass() : string

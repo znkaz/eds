@@ -8,13 +8,13 @@ use ZnLib\Migration\Domain\Base\BaseCreateTableMigration;
 class m_2021_07_26_110703_create_host_table extends BaseCreateTableMigration
 {
 
-    protected $tableName = 'eds_crl_host';
+    protected $tableName = 'eds_host';
     protected $tableComment = '';
 
     public function tableStructure(Blueprint $table): void
     {
         $table->integer('id')->autoIncrement()->comment('Идентификатор');
         $table->string('title')->comment('');
-        $table->string('url')->comment('');
+        $table->string('crl_url')->comment('');
     }
 }

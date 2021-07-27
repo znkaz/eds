@@ -15,13 +15,13 @@ class HostEntity implements ValidateEntityByMetadataInterface, UniqueInterface, 
     
     private $title = null;
 
-    private $url = null;
+    private $crlUrl = null;
 
     public static function loadValidatorMetadata(ClassMetadata $metadata)
     {
 //        $metadata->addPropertyConstraint('id', new Assert\NotBlank);
         $metadata->addPropertyConstraint('title', new Assert\NotBlank);
-        $metadata->addPropertyConstraint('url', new Assert\NotBlank);
+        $metadata->addPropertyConstraint('crlUrl', new Assert\NotBlank);
     }
 
     public function unique() : array
@@ -49,16 +49,13 @@ class HostEntity implements ValidateEntityByMetadataInterface, UniqueInterface, 
         $this->title = $title;
     }
 
-    public function setUrl($value) : void
+    public function setCrlUrl($value) : void
     {
         $this->url = $value;
     }
 
-    public function getUrl()
+    public function getCrlUrl()
     {
         return $this->url;
     }
-
-
 }
-

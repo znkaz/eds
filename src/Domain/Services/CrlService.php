@@ -35,7 +35,7 @@ class CrlService extends BaseCrudService implements CrlServiceInterface
     {
         /** @var HostEntity $hostEntity */
         $hostEntity = $this->getEntityManager()->oneById(HostEntity::class, $hostId);
-        $binary = file_get_contents($hostEntity->getUrl());
+        $binary = file_get_contents($hostEntity->getCrlUrl());
         $x509 = new X509();
         $crl = $x509->loadCRL($binary);
         return count($crl['tbsCertList']['revokedCertificates']);
@@ -45,7 +45,7 @@ class CrlService extends BaseCrudService implements CrlServiceInterface
     {
         /** @var HostEntity $hostEntity */
         $hostEntity = $this->getEntityManager()->oneById(HostEntity::class, $hostId);
-        $binary = file_get_contents($hostEntity->getUrl());
+        $binary = file_get_contents($hostEntity->getCrlUrl());
         $x509 = new X509();
         $crl = $x509->loadCRL($binary);
 //        $this->alertInfo('Count revoked certificates: ' . count($crl['tbsCertList']['revokedCertificates']));

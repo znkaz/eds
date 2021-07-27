@@ -21,6 +21,6 @@ class m_2021_07_26_174501_create_certificate_table extends BaseCreateTableMigrat
 
         $table->unique(['host_id', 'key']);
 
-        $this->addForeign($table, 'host_id', 'eds_crl_host');
+        $this->addForeign($table, 'host_id', 'eds_host');
     }
 }
