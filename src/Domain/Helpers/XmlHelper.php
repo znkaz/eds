@@ -11,14 +11,24 @@ use ZnCrypt\Base\Domain\Exceptions\FailCertificateSignatureException;
 class XmlHelper
 {
 
-    private function extractDataXml(string $xml): array
+    public static function extractCertificateFromXml(string $xml)
+    {
+        $xmlEncoder = new XmlEncoder();
+        $arr = $xmlEncoder->decode($xml);
+
+//        $certContent = $arr['response']['ds:Signature']['ds:KeyInfo']['ds:X509Data']['ds:X509Certificate'];
+        $certContent = $arr['root']['ds:Signature']['ds:KeyInfo']['ds:X509Data']['ds:X509Certificate'];
+        return $certContent;
+    }
+    
+    /*private function extractDataXml(string $xml): array
     {
         $xmlEncoder = new XmlEncoder();
         $xmlEncoder->setIsInline(false);
         $data = $xmlEncoder->decode($xml);
         unset($data['root']['ds:Signature']);
         return $data;
-    }
+    }*/
 
     public static function isEqualXml(string $orginalXml, string $signedXml): bool
     {
