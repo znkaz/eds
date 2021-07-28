@@ -31,13 +31,19 @@ class CrlService extends BaseCrudService implements CrlServiceInterface
         return CrlEntity::class;
     }
 
-    public function refreshCountByHostId(int $hostId) : int
-    {
+    private function loadFromHost(HostEntity $hostEntity) {
         /** @var HostEntity $hostEntity */
         $hostEntity = $this->getEntityManager()->oneById(HostEntity::class, $hostId);
         $binary = file_get_contents($hostEntity->getCrlUrl());
         $x509 = new X509();
         $crl = $x509->loadCRL($binary);
+    }
+
+    public function refreshCountByHostId(int $hostId) : int
+    {
+
+        
+        dd($hostEntity);
         return count($crl['tbsCertList']['revokedCertificates']);
     }
     

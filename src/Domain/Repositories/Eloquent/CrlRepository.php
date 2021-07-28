@@ -21,4 +21,3 @@ class CrlRepository extends BaseEloquentCrudRepository implements CrlRepositoryI
 
 
 }
-

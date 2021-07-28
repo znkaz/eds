@@ -16,6 +16,8 @@ class HostEntity implements ValidateEntityByMetadataInterface, UniqueInterface, 
     private $title = null;
 
     private $crlUrl = null;
+    
+    private $caUrl = null;
 
     public static function loadValidatorMetadata(ClassMetadata $metadata)
     {
@@ -51,11 +53,22 @@ class HostEntity implements ValidateEntityByMetadataInterface, UniqueInterface, 
 
     public function setCrlUrl($value) : void
     {
-        $this->url = $value;
+        $this->crlUrl = $value;
     }
 
     public function getCrlUrl()
     {
-        return $this->url;
+        return $this->crlUrl;
     }
+
+    public function getCaUrl()
+    {
+        return $this->caUrl;
+    }
+
+    public function setCaUrl($caUrl): void
+    {
+        $this->caUrl = $caUrl;
+    }
+    
 }
