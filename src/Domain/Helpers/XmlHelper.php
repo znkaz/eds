@@ -32,9 +32,17 @@ class XmlHelper
 
     public static function isEqualXml(string $orginalXml, string $signedXml): bool
     {
-        return StringHelper::removeDoubleSpace($orginalXml) == StringHelper::removeDoubleSpace(XmlHelper::removeSignature($signedXml));
+        //dd(self::prepareXml($orginalXml), self::prepareXml(XmlHelper::removeSignature($signedXml)));
+        return self::prepareXml($orginalXml) == self::prepareXml(XmlHelper::removeSignature($signedXml));
     }
-    
+
+    public static function prepareXml(string $xml): string {
+        $xml = StringHelper::removeDoubleSpace($xml);
+        $xml = trim($xml);
+        $xml = str_replace("\r\n", "\n", $xml);
+        return $xml;
+    }
+
     public static function removeSignature(string $xml): string
     {
         $pattern = '/<ds:(Signature[\s\S]+<\/ds:Signature>)/i';
