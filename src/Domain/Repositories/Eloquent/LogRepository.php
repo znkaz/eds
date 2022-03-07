@@ -2,7 +2,7 @@
 
 namespace ZnKaz\Eds\Domain\Repositories\Eloquent;
 
-use ZnLib\Db\Base\BaseEloquentCrudRepository;
+use ZnDatabase\Eloquent\Domain\Base\BaseEloquentCrudRepository;
 use ZnKaz\Eds\Domain\Entities\LogEntity;
 use ZnKaz\Eds\Domain\Interfaces\Repositories\LogRepositoryInterface;
 
