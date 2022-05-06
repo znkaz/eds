@@ -10,6 +10,7 @@ use RobRichards\XMLSecLibs\XMLSecEnc;
 use RobRichards\XMLSecLibs\XMLSecurityDSig;
 use RobRichards\XMLSecLibs\XMLSecurityKey;
 use ZnCore\Base\Encoders\XmlEncoder;
+use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
 use ZnCrypt\Base\Domain\Exceptions\FailSignatureException;
 use ZnCrypt\Base\Domain\Exceptions\InvalidDigestException;
 use ZnCrypt\Pki\X509\Domain\Helpers\X509Helper;
@@ -196,8 +197,10 @@ class XmlSignature
         $xmlEncoder = new XmlEncoder();
         $arr = $xmlEncoder->decode($xml);
 
+        $firstNode = ArrayHelper::first($arr);
+
 //        $certContent = $arr['response']['ds:Signature']['ds:KeyInfo']['ds:X509Data']['ds:X509Certificate'];
-        $certContent = $arr['root']['ds:Signature']['ds:KeyInfo']['ds:X509Data']['ds:X509Certificate'];
+        $certContent = $firstNode['ds:Signature']['ds:KeyInfo']['ds:X509Data']['ds:X509Certificate'];
         return $certContent;
     }
 
