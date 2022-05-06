@@ -1,2 +1,3 @@
 #!/bin/sh
-php console eds:crl:refresh
+cd ../../../bin
+php zn eds:crl:refresh
