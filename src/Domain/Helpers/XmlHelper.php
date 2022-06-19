@@ -4,7 +4,8 @@ namespace ZnKaz\Eds\Domain\Helpers;
 
 use phpseclib\File\X509;
 use ZnCore\Base\Encoders\XmlEncoder;
-use ZnCore\Base\Libs\Text\Helpers\StringHelper;
+
+use ZnCore\Base\Libs\Text\Helpers\TextHelper;
 use ZnCrypt\Base\Domain\Exceptions\CertificateExpiredException;
 use ZnCrypt\Base\Domain\Exceptions\FailCertificateSignatureException;
 
@@ -37,7 +38,7 @@ class XmlHelper
     }
 
     public static function prepareXml(string $xml): string {
-        $xml = StringHelper::removeDoubleSpace($xml);
+        $xml = TextHelper::removeDoubleSpace($xml);
         $xml = trim($xml);
         $xml = str_replace("\r\n", "\n", $xml);
         return $xml;
