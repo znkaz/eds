@@ -5,6 +5,7 @@ namespace ZnKaz\Eds\Commands;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use ZnCore\Base\Libs\Entity\Helpers\CollectionHelper;
 use ZnCore\Base\Libs\Entity\Helpers\EntityHelper;
 use ZnKaz\Eds\Domain\Entities\HostEntity;
 use ZnKaz\Eds\Domain\Entities\LogEntity;
@@ -33,8 +34,8 @@ class CrlRefreshCommand extends Command
         /** @var HostEntity[] $hostCollecttion */
         $hostCollecttion = $this->hostService->all();
 
-        $titles = EntityHelper::getColumn($hostCollecttion, 'title');
-        $hostCollecttionIndexed = EntityHelper::indexingCollection($hostCollecttion, 'title');
+        $titles = CollectionHelper::getColumn($hostCollecttion, 'title');
+        $hostCollecttionIndexed = CollectionHelper::indexing($hostCollecttion, 'title');
 
         $output->writeln('');
         $question = new ChoiceQuestion(
