@@ -4,7 +4,7 @@ namespace ZnKaz\Eds\Domain\Services;
 
 use phpseclib\File\X509;
 use ZnCore\Domain\Base\BaseCrudService;
-use ZnCore\Domain\Interfaces\Libs\EntityManagerInterface;
+use ZnCore\Base\Libs\EntityManager\Interfaces\EntityManagerInterface;
 use ZnCrypt\Base\Domain\Exceptions\CertificateExpiredException;
 use ZnCrypt\Base\Domain\Exceptions\FailCertificateSignatureException;
 use ZnKaz\Eds\Domain\Entities\CertificateEntity;
