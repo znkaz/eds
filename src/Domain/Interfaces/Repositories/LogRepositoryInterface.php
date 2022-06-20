@@ -2,7 +2,7 @@
 
 namespace ZnKaz\Eds\Domain\Interfaces\Repositories;
 
-use ZnCore\Domain\Interfaces\Repository\CrudRepositoryInterface;
+use ZnCore\Base\Libs\Repository\Interfaces\CrudRepositoryInterface;
 
 interface LogRepositoryInterface extends CrudRepositoryInterface
 {

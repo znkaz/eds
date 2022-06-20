@@ -2,7 +2,7 @@
 
 namespace ZnKaz\Eds\Domain\Interfaces\Services;
 
-use ZnCore\Domain\Interfaces\Service\CrudServiceInterface;
+use ZnCore\Base\Libs\Service\Interfaces\CrudServiceInterface;
 use ZnKaz\Eds\Domain\Entities\LogEntity;
 
 interface CrlServiceInterface extends CrudServiceInterface
