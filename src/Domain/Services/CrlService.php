@@ -33,7 +33,7 @@ class CrlService extends BaseCrudService implements CrlServiceInterface
 
     private function loadFromHost(HostEntity $hostEntity) {
         /** @var HostEntity $hostEntity */
-        $hostEntity = $this->getEntityManager()->oneById(HostEntity::class, $hostId);
+        $hostEntity = $this->getEntityManager()->getRepository(HostEntity::class)->oneById($hostId);
         $binary = file_get_contents($hostEntity->getCrlUrl());
         $x509 = new X509();
         $crl = $x509->loadCRL($binary);
@@ -50,7 +50,7 @@ class CrlService extends BaseCrudService implements CrlServiceInterface
     public function refreshByHostId(int $hostId) : LogEntity
     {
         /** @var HostEntity $hostEntity */
-        $hostEntity = $this->getEntityManager()->oneById(HostEntity::class, $hostId);
+        $hostEntity = $this->getEntityManager()->getRepository(HostEntity::class)->oneById($hostId);
         $binary = file_get_contents($hostEntity->getCrlUrl());
         $x509 = new X509();
         $crl = $x509->loadCRL($binary);
