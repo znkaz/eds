@@ -3,9 +3,9 @@
 namespace ZnKaz\Eds\Domain\Services;
 
 use ZnKaz\Eds\Domain\Interfaces\Services\HostServiceInterface;
-use ZnCore\Base\Libs\EntityManager\Interfaces\EntityManagerInterface;
+use ZnCore\Domain\EntityManager\Interfaces\EntityManagerInterface;
 use ZnKaz\Eds\Domain\Interfaces\Repositories\HostRepositoryInterface;
-use ZnCore\Base\Libs\Service\Base\BaseCrudService;
+use ZnCore\Domain\Service\Base\BaseCrudService;
 use ZnKaz\Eds\Domain\Entities\HostEntity;
 
 /**

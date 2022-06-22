@@ -6,13 +6,13 @@ use phpseclib\File\X509;
 use phpseclib\Math\BigInteger;
 use ZnCore\Base\Exceptions\AlreadyExistsException;
 use ZnCore\Base\Libs\Validation\Exceptions\UnprocessibleEntityException;
-use ZnCore\Base\Libs\Entity\Helpers\EntityHelper;
+use ZnCore\Domain\Entity\Helpers\EntityHelper;
 use ZnKaz\Eds\Domain\Entities\HostEntity;
 use ZnKaz\Eds\Domain\Entities\LogEntity;
 use ZnKaz\Eds\Domain\Interfaces\Services\CrlServiceInterface;
-use ZnCore\Base\Libs\EntityManager\Interfaces\EntityManagerInterface;
+use ZnCore\Domain\EntityManager\Interfaces\EntityManagerInterface;
 use ZnKaz\Eds\Domain\Interfaces\Repositories\CrlRepositoryInterface;
-use ZnCore\Base\Libs\Service\Base\BaseCrudService;
+use ZnCore\Domain\Service\Base\BaseCrudService;
 use ZnKaz\Eds\Domain\Entities\CrlEntity;
 
 /**
