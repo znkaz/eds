@@ -3,7 +3,7 @@
 namespace ZnKaz\Eds\Domain\Helpers;
 
 use phpseclib\File\X509;
-use ZnCore\Base\Encoders\XmlEncoder;
+use ZnCore\Base\Libs\Format\Encoders\XmlEncoder;
 
 use ZnCore\Base\Libs\Text\Helpers\TextHelper;
 use ZnCrypt\Base\Domain\Exceptions\CertificateExpiredException;
