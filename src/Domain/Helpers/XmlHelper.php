@@ -3,9 +3,9 @@
 namespace ZnKaz\Eds\Domain\Helpers;
 
 use phpseclib\File\X509;
-use ZnCore\Base\Libs\Format\Encoders\XmlEncoder;
+use ZnCore\Base\Format\Encoders\XmlEncoder;
 
-use ZnCore\Base\Libs\Text\Helpers\TextHelper;
+use ZnCore\Base\Text\Helpers\TextHelper;
 use ZnCrypt\Base\Domain\Exceptions\CertificateExpiredException;
 use ZnCrypt\Base\Domain\Exceptions\FailCertificateSignatureException;
 
