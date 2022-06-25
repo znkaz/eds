@@ -9,7 +9,7 @@ use phpseclib\File\X509;
 use RobRichards\XMLSecLibs\XMLSecEnc;
 use RobRichards\XMLSecLibs\XMLSecurityDSig;
 use RobRichards\XMLSecLibs\XMLSecurityKey;
-use ZnCore\Base\Format\Encoders\XmlEncoder;
+use ZnLib\Components\Format\Encoders\XmlEncoder;
 use ZnCore\Base\Arr\Helpers\ArrayHelper;
 use ZnCrypt\Base\Domain\Exceptions\FailSignatureException;
 use ZnCrypt\Base\Domain\Exceptions\InvalidDigestException;
