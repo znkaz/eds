@@ -32,7 +32,7 @@ class CrlRefreshCommand extends Command
         $output->writeln('<fg=white># eds:crl:refresh</>');
 
         /** @var HostEntity[] $hostCollecttion */
-        $hostCollecttion = $this->hostService->all();
+        $hostCollecttion = $this->hostService->findAll();
 
         $titles = CollectionHelper::getColumn($hostCollecttion, 'title');
         $hostCollecttionIndexed = CollectionHelper::indexing($hostCollecttion, 'title');
