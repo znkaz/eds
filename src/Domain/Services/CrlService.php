@@ -12,7 +12,7 @@ use ZnKaz\Eds\Domain\Entities\LogEntity;
 use ZnKaz\Eds\Domain\Interfaces\Services\CrlServiceInterface;
 use ZnCore\EntityManager\Interfaces\EntityManagerInterface;
 use ZnKaz\Eds\Domain\Interfaces\Repositories\CrlRepositoryInterface;
-use ZnCore\Domain\Service\Base\BaseCrudService;
+use ZnCore\Service\Base\BaseCrudService;
 use ZnKaz\Eds\Domain\Entities\CrlEntity;
 
 /**

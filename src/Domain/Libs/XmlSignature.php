@@ -10,7 +10,7 @@ use RobRichards\XMLSecLibs\XMLSecEnc;
 use RobRichards\XMLSecLibs\XMLSecurityDSig;
 use RobRichards\XMLSecLibs\XMLSecurityKey;
 use ZnLib\Components\Format\Encoders\XmlEncoder;
-use ZnCore\Base\Arr\Helpers\ArrayHelper;
+use ZnCore\Arr\Helpers\ArrayHelper;
 use ZnCrypt\Base\Domain\Exceptions\FailSignatureException;
 use ZnCrypt\Base\Domain\Exceptions\InvalidDigestException;
 use ZnCrypt\Pki\X509\Domain\Helpers\X509Helper;

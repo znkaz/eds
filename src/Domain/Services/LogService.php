@@ -5,7 +5,7 @@ namespace ZnKaz\Eds\Domain\Services;
 use ZnKaz\Eds\Domain\Interfaces\Services\LogServiceInterface;
 use ZnCore\EntityManager\Interfaces\EntityManagerInterface;
 use ZnKaz\Eds\Domain\Interfaces\Repositories\LogRepositoryInterface;
-use ZnCore\Domain\Service\Base\BaseCrudService;
+use ZnCore\Service\Base\BaseCrudService;
 use ZnKaz\Eds\Domain\Entities\LogEntity;
 
 /**
