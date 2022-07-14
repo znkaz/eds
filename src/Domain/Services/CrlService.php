@@ -10,9 +10,9 @@ use ZnCore\Entity\Helpers\EntityHelper;
 use ZnKaz\Eds\Domain\Entities\HostEntity;
 use ZnKaz\Eds\Domain\Entities\LogEntity;
 use ZnKaz\Eds\Domain\Interfaces\Services\CrlServiceInterface;
-use ZnCore\EntityManager\Interfaces\EntityManagerInterface;
+use ZnDomain\EntityManager\Interfaces\EntityManagerInterface;
 use ZnKaz\Eds\Domain\Interfaces\Repositories\CrlRepositoryInterface;
-use ZnCore\Service\Base\BaseCrudService;
+use ZnDomain\Service\Base\BaseCrudService;
 use ZnKaz\Eds\Domain\Entities\CrlEntity;
 
 /**
