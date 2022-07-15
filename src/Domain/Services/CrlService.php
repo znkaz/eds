@@ -4,9 +4,9 @@ namespace ZnKaz\Eds\Domain\Services;
 
 use phpseclib\File\X509;
 use phpseclib\Math\BigInteger;
-use ZnCore\Entity\Exceptions\AlreadyExistsException;
-use ZnCore\Validation\Exceptions\UnprocessibleEntityException;
-use ZnCore\Entity\Helpers\EntityHelper;
+use ZnDomain\Entity\Exceptions\AlreadyExistsException;
+use ZnDomain\Validator\Exceptions\UnprocessibleEntityException;
+use ZnDomain\Entity\Helpers\EntityHelper;
 use ZnKaz\Eds\Domain\Entities\HostEntity;
 use ZnKaz\Eds\Domain\Entities\LogEntity;
 use ZnKaz\Eds\Domain\Interfaces\Services\CrlServiceInterface;
